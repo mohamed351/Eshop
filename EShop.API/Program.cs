@@ -1,6 +1,7 @@
 using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace EShop.API
 {
@@ -21,6 +22,8 @@ namespace EShop.API
                 opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             var app = builder.Build();
 
