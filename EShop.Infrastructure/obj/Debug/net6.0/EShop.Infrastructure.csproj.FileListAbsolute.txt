@@ -1,0 +1,17 @@
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Infrastructure.deps.json
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Infrastructure.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Infrastructure.pdb
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.csproj.AssemblyReference.cache
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.AssemblyInfoInputs.cache
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.AssemblyInfo.cs
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.csproj.CoreCompileInputs.cache
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\refint\EShop.Infrastructure.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.pdb
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\ref\EShop.Infrastructure.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Core.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Core.pdb
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.csproj.CopyComplete
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\bin\Debug\net6.0\EShop.Infrastructure.runtimeconfig.json
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.Infrastructure\obj\Debug\net6.0\EShop.Infrastructure.genruntimeconfig.cache
