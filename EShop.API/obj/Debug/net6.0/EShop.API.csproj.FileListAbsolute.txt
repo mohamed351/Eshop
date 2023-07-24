@@ -91,3 +91,4 @@ E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.API\bin\Debug\net6.0\EShop.C
 E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.API\obj\Debug\net6.0\EShop.API.MvcApplicationPartsAssemblyInfo.cs
 E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.API\bin\Debug\net6.0\AutoMapper.dll
 E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.API\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+E:\Education\AspNetCoreAndAngular\Eshop\EShop\EShop.API\bin\Debug\net6.0\EShop.API.staticwebassets.runtime.json
