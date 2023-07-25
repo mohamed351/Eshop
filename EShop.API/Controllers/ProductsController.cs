@@ -11,9 +11,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EShop.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductsController : ControllerBase
+   
+    public class ProductsController : BaseAPIController
     {
         private readonly IGenericRepository<Product> productRepo;
         private readonly IGenericRepository<ProductBrand> brandRepo;
