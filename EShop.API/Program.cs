@@ -1,6 +1,11 @@
+using EShop.API.Errors;
+using EShop.API.Extentions;
+using EShop.API.Middleware;
 using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace EShop.API
 {
@@ -13,17 +18,11 @@ namespace EShop.API
             // Add services to the container.
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-            builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
-            builder.Services.AddDbContext<StoreDbContext>(opt =>
-            {
-                opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
-            });
-            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddApplicationServices(builder.Configuration);
 
             var app = builder.Build();
-
+            app.UseStatusCodePagesWithReExecute("/errors/{0}");
+            app.UseMiddleware<ExceptionMiddleware>();
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -31,8 +30,8 @@ namespace EShop.API
                 app.UseSwaggerUI();
             }
 
-           // app.UseHttpsRedirection();
-
+            // app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseAuthorization();
 
 
