@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using EShop.API.DTOS;
 using EShop.Core.Entities;
+using Microsoft.Extensions.Configuration;
+using System;
 
 namespace EShop.API.Mappings
 {
