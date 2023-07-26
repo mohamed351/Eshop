@@ -3,9 +3,16 @@ using EShop.API.Extentions;
 using EShop.API.Middleware;
 using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Reflection;
+using System.Threading.Tasks;
+using EShop.API.Extentions;
 
 namespace EShop.API
 {
@@ -32,6 +39,7 @@ namespace EShop.API
 
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
 

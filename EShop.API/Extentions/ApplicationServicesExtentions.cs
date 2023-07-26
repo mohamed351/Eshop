@@ -3,6 +3,10 @@ using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
 
 namespace EShop.API.Extentions
 {
@@ -39,7 +43,7 @@ namespace EShop.API.Extentions
 
                 };
             });
-
+            services.AddCors(opt=> opt.AddPolicy("CorsPolicy",a=> a.AllowAnyHeader().AllowAnyMethod().WithOrigins("https//localhost:4200")));
             return services;
         }
     }

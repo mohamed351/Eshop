@@ -37,6 +37,12 @@ namespace EShop.Infrastructure.Data
         {
             return await this.ApplySpecification(specification).ToListAsync();
         }
+      
+
+        public async Task<int> CountAsync(ISpecification<T> specification)
+        {
+            return await this.ApplySpecification(specification).CountAsync();
+        }
         private IQueryable<T> ApplySpecification(ISpecification<T> specification)
         {
             return SpecificationEvaluator<T>.GetQuery(this.context.Set<T>().AsQueryable(), specification);

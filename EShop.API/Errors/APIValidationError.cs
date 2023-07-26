@@ -1,4 +1,6 @@
-﻿namespace EShop.API.Errors
+﻿using System.Collections.Generic;
+
+namespace EShop.API.Errors
 {
     public class APIValidationErrorResponse : APIResponse
     {

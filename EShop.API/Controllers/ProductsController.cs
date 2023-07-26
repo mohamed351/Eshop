@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using EShop.API.DTOS;
+using EShop.API.Helpers;
 using EShop.Core.Entities;
 using EShop.Core.Interfaces;
 using EShop.Core.Specifications;
@@ -8,6 +9,8 @@ using EShop.Infrastructure.Data;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EShop.API.Controllers
 {
@@ -33,10 +36,19 @@ namespace EShop.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ProductToReturnDTO>>> GetProducts()
+        public async Task<ActionResult<Pagination<ProductToReturnDTO>>> GetProducts( [FromQuery] ProductSpecParams productSpec)
         {
-            var specficiation = new ProductWithTypeAndBrandSpecification();
-            return Ok(this.mapper.Map<List<ProductToReturnDTO>>( await productRepo.ListAllAsync(specficiation)));
+            var specficiation = new ProductWithTypeAndBrandSpecification(productSpec);
+            var countspecification = new ProductCountSpecification(productSpec);
+            var paging = new Pagination<ProductToReturnDTO>()
+            {
+                Count = await productRepo.CountAsync(countspecification),
+                Data = this.mapper.Map<List<ProductToReturnDTO>>(await productRepo.ListAllAsync(specficiation)),
+                PageIndex = productSpec.PageIndex,
+                PageSize = productSpec.PageSize
+            };
+      
+            return Ok(paging);
         }
         [HttpGet("{ID?}")]
         public async Task<ActionResult<ProductToReturnDTO>> GetProductByID(int? ID)
