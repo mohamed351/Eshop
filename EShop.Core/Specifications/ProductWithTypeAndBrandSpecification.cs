@@ -12,9 +12,9 @@ namespace EShop.Core.Specifications
     {
         public ProductWithTypeAndBrandSpecification(ProductSpecParams productSpec)
             :base(x=> 
-            string.IsNullOrEmpty(productSpec.Search) || x.Name.ToLower().Contains(productSpec.Search) &&
+            (string.IsNullOrEmpty(productSpec.Search) || x.Name.ToLower().Contains(productSpec.Search)) &&
             (!productSpec.BrandID.HasValue || x.ProductBrandID == productSpec.BrandID)
-            && !productSpec.TypeID.HasValue || x.ProductTypeId == productSpec.TypeID)
+            && (!productSpec.TypeID.HasValue || x.ProductTypeId == productSpec.TypeID))
         {
             AddInclude(a => a.ProductBrand);
             AddInclude(a => a.ProductType);
