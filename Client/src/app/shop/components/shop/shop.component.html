@@ -6,6 +6,7 @@
 
       <section class="col-md-3">
         <h5 class="text-warning">Sort</h5>
+<<<<<<< HEAD
         <select name="" class="form-control mb-4" (change)="onSortChange($event)" >
             <option *ngFor="let item of sortOptions" [value]="item.value"> {{item.text}} </option>
         </select>
@@ -25,6 +26,28 @@
           [value]="item.id"
           (click)="onProductTypeSelected(item.id)"
           >{{item.name}}</li>
+=======
+        <select name="" class="form-control mb-4">
+          <option selected>Alphabetical</option>
+          <option>Price : Low to high</option>
+          <option>Pice : high to Low</option>
+        </select>
+        <h5 class="text-warning">Brands</h5>
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">An active item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+        </ul>
+        <h5 class="text-warning">Types</h5>
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">An active item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+>>>>>>> master
         </ul>
       </section>
       <section class="col-md-9">

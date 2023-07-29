@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {ShopService} from "../../services/shop.service";
 import { Product } from 'src/app/models/product';
+<<<<<<< HEAD
 import { Brand } from 'src/app/models/brand';
 import { ProductType } from 'src/app/models/productType';
+=======
+>>>>>>> master
 
 @Component({
   selector: 'app-shop',
@@ -11,6 +14,7 @@ import { ProductType } from 'src/app/models/productType';
 })
 export class ShopComponent implements OnInit {
   products:Product[] = [];
+<<<<<<< HEAD
   brands:Brand[] = [];
   types:ProductType[] =[];
   selectedBrandID =0;
@@ -65,5 +69,14 @@ export class ShopComponent implements OnInit {
       this.getProduct();
   }
 
+=======
+  constructor(private shopingService:ShopService) { }
+
+  ngOnInit(): void {
+    this.shopingService.getProducts().subscribe(data =>{
+      this.products = data.data;
+    })
+  }
+>>>>>>> master
 
 }
