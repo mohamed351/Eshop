@@ -1,0 +1,52 @@
+<!-- <ul>
+  <li *ngFor="let item of products"> {{item.name}}</li>
+ </ul> -->
+<div class="container">
+    <div class="row">
+
+      <section class="col-md-3">
+        <h5 class="text-warning">Sort</h5>
+        <select name="" class="form-control mb-4">
+          <option selected>Alphabetical</option>
+          <option>Price : Low to high</option>
+          <option>Pice : high to Low</option>
+        </select>
+        <h5 class="text-warning">Brands</h5>
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">An active item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+        </ul>
+        <h5 class="text-warning">Types</h5>
+        <ul class="list-group">
+          <li class="list-group-item active" aria-current="true">An active item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+          <li class="list-group-item">A fourth item</li>
+          <li class="list-group-item">And a fifth one</li>
+        </ul>
+      </section>
+      <section class="col-md-9">
+        <div class="d-flex justify-content-between pd-2">
+            <header>
+              <span>
+                Showing <strong>10</strong> of <strong>18</strong> Results
+
+              </span>
+            </header>
+            <div class="d-flex">
+              <input type="text" placeholder="Search" class="form-control me-2" />
+              <button class="btn btn-outline-primary mx-2">Search</button>
+              <button class="btn btn-outline-success mx-2">Reset</button>
+            </div>
+        </div>
+        <div class="row row-cols-3 g-3 mt-2" >
+          <ng-container *ngFor="let item of products">
+              <app-product-item [product]="item"></app-product-item>
+          </ng-container>
+        </div>
+      </section>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+.nav-bar-element{
+  min-height: 70px
+}
+.cart-item{
+  margin: 0.2rem;
+  padding: 0.3rem;
+  font-size: 1.2rem;
+}
+.log-image{
+  height: 3.5rem;
+}
