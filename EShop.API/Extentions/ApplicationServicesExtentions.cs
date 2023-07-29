@@ -43,7 +43,7 @@ namespace EShop.API.Extentions
 
                 };
             });
-            services.AddCors(opt=> opt.AddPolicy("CorsPolicy",a=> a.AllowAnyHeader().AllowAnyMethod().WithOrigins("https//localhost:4200")));
+            services.AddCors(opt=> opt.AddPolicy("CorsPolicy",a=> a.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200")));
             return services;
         }
     }
