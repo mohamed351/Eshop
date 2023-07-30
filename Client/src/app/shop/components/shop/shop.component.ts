@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {ShopService} from "../../services/shop.service";
 import { Product } from 'src/app/models/product';
-<<<<<<< HEAD
 import { Brand } from 'src/app/models/brand';
 import { ProductType } from 'src/app/models/productType';
-=======
->>>>>>> master
+import { ShopParams } from 'src/app/models/shopParams';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 
 @Component({
   selector: 'app-shop',
@@ -13,22 +12,16 @@ import { ProductType } from 'src/app/models/productType';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
+   @ViewChild("search")  search:ElementRef<any> |undefined;
   products:Product[] = [];
-<<<<<<< HEAD
   brands:Brand[] = [];
   types:ProductType[] =[];
+  shopingParams:ShopParams = new ShopParams()
   selectedBrandID =0;
   selectedTypeID =0;
   sortData:string = "";
 
-  /**
-   *
-   *
-   *   <option selected>Alphabetical</option>
-   *  <option>Pice : high to Low</option>
-          <option>Price : Low to high</option>
 
-   */
    sortOptions =[
     {value:"name", text:"Alphabetical"},
     {value:"priceAsc", text:"Low to High" },
@@ -42,8 +35,11 @@ export class ShopComponent implements OnInit {
     this.getType();
   }
   getProduct(){
-    this.shopingService.getProducts(this.selectedBrandID,this.selectedTypeID, this.sortData).subscribe(data =>{
+    this.shopingService.getProducts(this.shopingParams).subscribe(data =>{
       this.products = data.data;
+      this.shopingParams.pageIndex = data.pageIndex;
+      this.shopingParams.pageSize = data.pageSize;
+      this.shopingParams.count = data.count;
     })
   }
   getBrands(){
@@ -57,26 +53,34 @@ export class ShopComponent implements OnInit {
     })
   }
   onBrandSelected(brandId:number){
-    this.selectedBrandID = brandId;
+    this.shopingParams.pageIndex = 1;
+    this.shopingParams.selectedBrandID = brandId;
     this.getProduct();
   }
   onProductTypeSelected(productTypeID:number){
-    this.selectedTypeID = productTypeID;
+    this.shopingParams.pageIndex = 1;
+    this.shopingParams.selectedTypeID = productTypeID;
     this.getProduct();
   }
   onSortChange(data:any){
-      this.sortData = data.target.value;
+    this.shopingParams.sortData= data.target.value;
       this.getProduct();
   }
-
-=======
-  constructor(private shopingService:ShopService) { }
-
-  ngOnInit(): void {
-    this.shopingService.getProducts().subscribe(data =>{
-      this.products = data.data;
-    })
+  onPageChanges(data:PageChangedEvent){
+    this.shopingParams.pageIndex = data.page;
+    this.getProduct();
   }
->>>>>>> master
+  onSearch(){
+    this.shopingParams.search = this.search?.nativeElement.value;
+    this.getProduct();
+  }
+  OnReset(){
+    if(this.search?.nativeElement){
+      (this.search?.nativeElement).value = ""
+      this.shopingParams.search = "";
+      this.getProduct();
+    }
+  }
+
 
 }

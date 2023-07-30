@@ -7,14 +7,14 @@
 
       <ul class="navbar-nav text-uppercase  mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link " routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"  routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Shop</a>
+          <a class="nav-link" routerLinkActive="active"  routerLink="/shop">Shop</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
+          <a class="nav-link" routerLinkActive="active"  routerLink="/contact">Contact</a>
         </li>
 
       </ul>
