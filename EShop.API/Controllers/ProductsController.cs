@@ -63,7 +63,7 @@ namespace EShop.API.Controllers
                 return NotFound();
             }
             
-            return Ok(this.mapper.Map<List<ProductToReturnDTO>>( product));
+            return Ok(this.mapper.Map<ProductToReturnDTO>( product));
         }
         [HttpGet("brand")]
         public async Task<ActionResult<ProductBrand>> GerBrands()
