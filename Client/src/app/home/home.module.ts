@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
 
+
 const routers:Routes = [
-  {path :"", component:HomeComponent}
+  {path :"", component:HomeComponent , data:{breadcrumb:"Home" }},
+
 ]
 
 @NgModule({
   declarations: [
-    HomeComponent
+    HomeComponent,
+
   ],
   imports: [
     CommonModule,

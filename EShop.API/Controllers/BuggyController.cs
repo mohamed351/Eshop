@@ -29,7 +29,7 @@ namespace EShop.API.Controllers
         [HttpGet("badrequest")]
         public ActionResult GetBadRequest()
         {
-            return BadRequest();
+            return BadRequest(new APIResponse(400,"Bad Request"));
         }
         [HttpGet("badrequestparamter/{id}")]
         public ActionResult GetBadRequesrtParamter(int id)

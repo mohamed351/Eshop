@@ -5,7 +5,8 @@ import { ShopComponent } from './shop/components/shop/shop.component';
 import { ShopDetailsComponent } from './shop/components/shop-details/shop-details.component';
 
 const routes: Routes = [
-  {path:"", loadChildren:()=> import("./home/home.module").then(c=> c.HomeModule)},
+  {path:"", loadChildren:()=> import("./home/home.module").then(c=> c.HomeModule) , data: {breadcrumb:"Home"}},
+   {path:"errors", loadChildren:()=> import("./core/core.module").then(c=> c.CoreModule)},
   {path:"shop", loadChildren:()=> import("./shop/shop.module").then(c=> c.ShopModule)},
   {path:"**",redirectTo:"", pathMatch:"full"}
 ];

@@ -9,7 +9,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 const router:Routes = [
   {path:"", component:ShopComponent},
-  {path:":id", component:ShopDetailsComponent},
+  {path:":id", component:ShopDetailsComponent , data:{
+    breadcrumb: {
+    alias: 'productDetails'
+  }}},
 ]
 @NgModule({
   declarations: [

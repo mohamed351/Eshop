@@ -1,6 +1,7 @@
 ﻿
 using AutoMapper;
 using EShop.API.DTOS;
+using EShop.API.Errors;
 using EShop.API.Helpers;
 using EShop.Core.Entities;
 using EShop.Core.Interfaces;
@@ -55,12 +56,12 @@ namespace EShop.API.Controllers
         {
             if(ID == null)
             {
-                return BadRequest();
+                return BadRequest(new APIResponse(400,"ID is not valid"));
             }
             var product = await productRepo.GetEntityWithSpec(new ProductWithTypeAndBrandSpecification(ID.Value));
             if(product == null)
             {
-                return NotFound();
+                return NotFound("Product Not Found");
             }
             
             return Ok(this.mapper.Map<ProductToReturnDTO>( product));
