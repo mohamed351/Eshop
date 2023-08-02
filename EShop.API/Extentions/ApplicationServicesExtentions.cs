@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using StackExchange.Redis;
 using System;
 using System.Linq;
 
@@ -22,6 +23,12 @@ namespace EShop.API.Extentions
             {
                 opt.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
+            services.AddSingleton<IConnectionMultiplexer>(c =>
+            {
+                var option = ConfigurationOptions.Parse(configuration.GetConnectionString("RedisConnection"));
+                return ConnectionMultiplexer.Connect(option);
+            });
+            services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
