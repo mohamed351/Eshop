@@ -1,0 +1,39 @@
+.over-lay{
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top:0;
+  transition: all 0.5s ;
+  opacity: 0;
+
+}
+.over-lay:hover{
+  opacity: 1;
+}
+
+.over-lay button{
+  width: 100px !important;
+  margin-left: 10px;
+  margin-right: 10px;
+  transition: all 1s ;
+
+
+}
+.over-lay:hover button{
+  transform: translateX(0px) !important;
+}
+
+.over-lay button:first-child{
+  transform: translateX(-20px);
+
+}
+.over-lay button:nth-child(2){
+  transform: translateX(20px);
+
+}
