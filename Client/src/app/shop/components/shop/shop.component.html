@@ -2,7 +2,7 @@
   <li *ngFor="let item of products"> {{item.name}}</li>
  </ul> -->
 
-    <div class="row">
+    <div class="row" *ngIf="brands.length > 0 && types.length >0">
 
       <section class="col-md-3 mt-2">
         <h5 class="text-warning">Sort</h5>
