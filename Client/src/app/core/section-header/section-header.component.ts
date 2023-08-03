@@ -12,11 +12,13 @@ export class SectionHeaderComponent implements OnInit {
   constructor(public bsService:BreadcrumbService) { }
 
   ngOnInit(): void {
-
+    this.bsService.breadcrumbs$.subscribe(a=>{
+      console.log(a);
+    })
   }
   onElementClick( testing:any){
 
-    console.log(testing);
+
   }
 
 }

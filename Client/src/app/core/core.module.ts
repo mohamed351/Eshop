@@ -8,6 +8,7 @@ import { TestingErrorComponent } from './testing-error/testing-error.component';
 import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import {BreadcrumbModule} from "xng-breadcrumb";
+import { NgxSpinnerModule } from 'ngx-spinner';
 const routes:Routes =[
   {path:"", component:TestingErrorComponent},
     {path:"not-found", component:NotFoundComponent},
@@ -25,12 +26,14 @@ const routes:Routes =[
       preventDuplicates:true,
     }),
     BreadcrumbModule,
+    NgxSpinnerModule
 
 
   ],
   exports:[
     NavbarComponent,
-    SectionHeaderComponent
+    SectionHeaderComponent,
+    NgxSpinnerModule
   ]
 })
 export class CoreModule { }
