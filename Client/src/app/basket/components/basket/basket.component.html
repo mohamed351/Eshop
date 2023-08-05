@@ -1,0 +1,48 @@
+<div class="container">
+      <div *ngIf="(basket.basketService$|async) === null">
+          <p>There are no items in your basket</p>
+      </div>
+
+      <ng-container *ngIf="(basket.basketService$ |async) as basket">
+          <div class="container">
+              <table class="table table-responsive">
+                  <thead>
+                      <th><div class="py-2">Product</div></th>
+                      <th><div class="py-2">Price</div></th>
+                      <th><div class="py-2">Quantity</div></th>
+                      <th><div class="py-2">Total</div></th>
+                      <th><div class="py-2">Remove</div></th>
+                  </thead>
+                  <tbody >
+                       <tr *ngFor="let item of basket.items">
+                          <td>
+                            <img [src]="item.pictureUrl" width="120px" />
+                            {{item.productName}}
+                          </td>
+                          <td>
+
+                            {{item.price}}
+                          </td>
+                          <td>
+                              <div class="align-items-center">
+                               <button class="btn btn-warning"> -</button>  {{item.quantity}} <button class="btn btn-warning"></button>
+                          </div>
+                          </td>
+                          <td>
+
+                            {{item.quantity * item.price}}
+                          </td>
+
+                          <div>
+                            <button class="btn btn-outline-danger">
+                              <i class=""></i>
+                            </button>
+                          </div>
+                       </tr>
+
+
+                  </tbody>
+              </table>
+          </div>
+      </ng-container>
+</div>

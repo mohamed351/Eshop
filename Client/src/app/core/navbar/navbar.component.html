@@ -29,14 +29,14 @@
         </li>
         <li class="mx-3">
 
-          <div type="button"  class="cart-item position-relative">
+          <a type="button" routerLink="/basket"  class="cart-item position-relative">
             <i class="bi bi-cart " ></i>
 
-            <span style="font-size: 10px;" class="position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
-              10
+            <span style="font-size: 8a2px;" *ngIf="(basketService.basketService$ |async) as basket " class="text-white position-absolute top-0 start-100 translate-middle p-2 bg-primary border border-light rounded-circle">
+              {{  basket.items.length}}
               <span class="visually-hidden">10</span>
             </span>
-          </div>
+          </a>
 
 
 

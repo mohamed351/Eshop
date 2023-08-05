@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home/home.component';
 import { RouterModule, Routes } from '@angular/router';
-
+import {CarouselModule} from "ngx-bootstrap/carousel";
 
 const routers:Routes = [
   {path :"", component:HomeComponent , data:{breadcrumb:"Home" }},
@@ -16,7 +16,8 @@ const routers:Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routers)
+    RouterModule.forChild(routers),
+    CarouselModule
   ],
 
 })
