@@ -1,12 +1,13 @@
 <div class="container">
-      <div *ngIf="(basket.basketService$|async) === null">
-          <p>There are no items in your basket</p>
+      <div *ngIf="(basket.basketService$|async) === null ||(basket.basketService$|async)?.items?.length  === 0">
+          <p class="text-center mt-4">There are no items in your basket</p>
       </div>
 
-      <ng-container *ngIf="(basket.basketService$ |async) as basket">
-          <div class="container">
+      <ng-container *ngIf="(basket.basketService$ |async) as basket " >
+
+          <div class="container" *ngIf="basket.items.length !== 0">
               <table class="table table-responsive">
-                  <thead>
+                  <thead class="table-secondary">
                       <th><div class="py-2">Product</div></th>
                       <th><div class="py-2">Price</div></th>
                       <th><div class="py-2">Quantity</div></th>
@@ -14,35 +15,49 @@
                       <th><div class="py-2">Remove</div></th>
                   </thead>
                   <tbody >
-                       <tr *ngFor="let item of basket.items">
+                       <tr *ngFor="let item of basket.items" class=" align-items-center">
                           <td>
-                            <img [src]="item.pictureUrl" width="120px" />
-                            {{item.productName}}
+                            <img [src]="item.pictureUrl" width="80px" />
+                             <span> {{item.productName}}</span>
+                              <span> {{item.type}} </span>
                           </td>
-                          <td>
+                          <td style="font-size: 25px;">
 
-                            {{item.price}}
+                            {{item.price|currency}}
                           </td>
                           <td>
                               <div class="align-items-center">
-                               <button class="btn btn-warning"> -</button>  {{item.quantity}} <button class="btn btn-warning"></button>
+                                <i (click)="decreseQuantity(item.id)" class="fa fa-minus-circle text-warning" style="font-size: 25px;"></i>  <span style="font-size: 25px;"> {{item.quantity}} </span> <i class="fa fa-plus-circle text-warning"  (click)="increaseQuantity(item.id)" style="font-size: 25px;"></i>
                           </div>
                           </td>
                           <td>
 
-                            {{item.quantity * item.price}}
+                            {{(item.quantity * item.price)|currency}}
                           </td>
 
+                          <td>
                           <div>
-                            <button class="btn btn-outline-danger">
-                              <i class=""></i>
+                            <button class="btn btn-outline-danger" (click)="removeBasket(item.id)">
+                              <i class="fa fa-trash-o"></i>
                             </button>
                           </div>
+                        </td>
                        </tr>
 
 
                   </tbody>
               </table>
+              <div class="row" >
+                <div class="col-6 offset-6">
+                    <app-order-totals></app-order-totals>
+                    <div class="d-grid">
+                        <a routerLink="/checkout" class="btn btn-outline-primary py-2">
+                          Proceed to Checkout
+                        </a>
+                    </div>
+                </div>
+              </div>
           </div>
+
       </ng-container>
 </div>

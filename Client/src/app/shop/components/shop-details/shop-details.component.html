@@ -6,15 +6,15 @@
     <h2>{{product.name}}</h2>
     <p>{{product.price |currency}}</p>
     <div class="d-flex justify-content-start align-items-center">
-      <button class="btn btn-warning mx-1">
-        <i>+ </i>
+      <button class="btn btn-warning mx-1" (click)="IncreseQuantity()">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i>
       </button>
-      <span>2</span>
-      <button class="btn btn-warning mx-1">
-        <i>- </i>
+      <span style="font-size: 20;" class="mx-2"> {{  quantity}} </span>
+      <button class="btn btn-warning mx-1" (click)="DecreseQuantity()">
+        <i class="fa fa-minus-circle" aria-hidden="true"></i>
       </button>
 
-      <button class="btn btn-secondary mx-1">Add to Cart</button>
+      <button class="btn btn-secondary mx-1" (click)="SetQuantity()">Add to Cart</button>
     </div>
 
     <div class="row mt-4">

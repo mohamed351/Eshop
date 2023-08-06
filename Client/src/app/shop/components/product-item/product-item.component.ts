@@ -10,9 +10,11 @@ import { Product } from 'src/app/models/product';
 export class ProductItemComponent implements OnInit {
 
   @Input() product?:Product;
+  quantity:number = 0;
   constructor(private basketSerivce:BasketService) { }
 
   ngOnInit(): void {
+
   }
   addProductToItem(){
     this.product && this.basketSerivce.addItemToBasket(this.product)
