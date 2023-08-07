@@ -26,7 +26,7 @@ namespace EShop.API
 
             builder.Services.AddControllers();
             builder.Services.AddApplicationServices(builder.Configuration);
-
+            builder.Services.AddIdentityService(builder.Configuration);
             var app = builder.Build();
             app.UseStatusCodePagesWithReExecute("/errors/{0}");
             app.UseMiddleware<ExceptionMiddleware>();
