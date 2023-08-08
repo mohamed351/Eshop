@@ -11,15 +11,14 @@ namespace EShop.Core.Entities.Identity
     public class AppUser:IdentityUser
     {
         public string DisplayName { get; set; }
+        public Address Address { get; set; }
 
 
     }
     public class Address
     {
         public int ID { get; set; }
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+      
 
         public string Street { get; set; }
 

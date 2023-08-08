@@ -13,6 +13,8 @@ using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using EShop.API.Extentions;
+using Microsoft.AspNetCore.Identity;
+using EShop.Core.Entities.Identity;
 
 namespace EShop.API
 {
@@ -47,11 +49,13 @@ namespace EShop.API
             using(var scopped = app.Services.CreateScope())
             {
                 var context = scopped.ServiceProvider.GetRequiredService<StoreDbContext>();
+                var userManager = scopped.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
                 var logger = scopped.ServiceProvider.GetRequiredService<ILogger<Program>>();
                 try
                 {
                     await context.Database.MigrateAsync();
                     await StoreContextSeedData.SeedAsync(context);
+                    await IdentityContextSeedData.SeedUserAsync(userManager);
                 }
                 catch (Exception ex)
                 {

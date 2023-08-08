@@ -17,7 +17,8 @@ namespace EShop.API.Errors
                 400 => "A bad Request , you have made",
                 401 => "Authorized , you are not",
                 404 => "Resource found , it was not",
-                500 => "an Error was occured"
+                500 => "an Error was occured",
+                _ => "Unknown"
             };
         }
 

@@ -1,6 +1,7 @@
 ﻿using EShop.API.Errors;
 using EShop.Core.Interfaces;
 using EShop.Infrastructure.Data;
+using EShop.Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ namespace EShop.API.Extentions
                 var option = ConfigurationOptions.Parse(configuration.GetConnectionString("RedisConnection"));
                 return ConnectionMultiplexer.Connect(option);
             });
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IBasketRepository, BasketRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
