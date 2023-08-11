@@ -1,9 +1,14 @@
-﻿using EShop.API.DTOS;
+﻿using AutoMapper;
+using EShop.API.DTOS;
 using EShop.API.Errors;
 using EShop.Core.Entities.Identity;
 using EShop.Core.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace EShop.API.Controllers
@@ -13,12 +18,14 @@ namespace EShop.API.Controllers
         private readonly UserManager<AppUser> userManager;
         private readonly SignInManager<AppUser> signInManager;
         private readonly ITokenService tokenService;
+        private readonly IMapper mapper;
 
-        public AccountController(UserManager<AppUser> userManager , SignInManager<AppUser> signInManager , ITokenService tokenService)
+        public AccountController(UserManager<AppUser> userManager , SignInManager<AppUser> signInManager , ITokenService tokenService , IMapper mapper)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.tokenService = tokenService;
+            this.mapper = mapper;
         }
         [HttpPost("login")]
         public async Task<ActionResult<UserDTO>> Login(LoginDTO loginDTO)
@@ -39,6 +46,34 @@ namespace EShop.API.Controllers
                 Token = this.tokenService.CreateToken(user),
                 DisplayName = user.DisplayName
             }); 
+        }
+        [HttpGet]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<UserDTO>> GetCurrentUser()
+        {
+            var email = HttpContext.User?.Claims.FirstOrDefault(a => a.Type == ClaimTypes.Email)?.Value;
+            var user = await userManager.FindByEmailAsync(email);
+
+            return new UserDTO()
+            {
+                DisplayName = user.DisplayName,
+                Email = user.Email,
+                Token = tokenService.CreateToken(user)
+            };
+        }
+        [HttpGet("emailexists")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<bool>> CheckEmailExist([FromQuery] string email)
+        {
+            return await userManager.FindByEmailAsync(email) != null;
+        }
+        [HttpGet("address")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public async Task<ActionResult<AddressDTO>> GetAddressAsync()
+        {
+            var email = HttpContext.User.Claims.FirstOrDefault(a => a.Type == ClaimTypes.Email)?.Value;
+            var address = await userManager.FindByEmailAsync(email);
+            return this.mapper.Map<AddressDTO>(address);
         }
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)

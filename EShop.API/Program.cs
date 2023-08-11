@@ -43,6 +43,7 @@ namespace EShop.API
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
             app.UseAuthorization();
+            app.UseAuthorization();
 
 
             app.MapControllers();

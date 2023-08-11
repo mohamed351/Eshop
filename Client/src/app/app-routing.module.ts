@@ -9,6 +9,7 @@ const routes: Routes = [
    {path:"errors", loadChildren:()=> import("./core/core.module").then(c=> c.CoreModule)},
   {path:"shop", loadChildren:()=> import("./shop/shop.module").then(c=> c.ShopModule)},
   {path:"basket", loadChildren:()=> import("./basket/basket.module").then(c=> c.BasketModule)},
+  {path:"account", loadChildren:()=> import("./account/account.module").then(c=> c.AccountModule)},
   {path:"**",redirectTo:"", pathMatch:"full"}
 ];
 

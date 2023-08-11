@@ -29,16 +29,21 @@ namespace EShop.API.Extentions
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddSignInManager<SignInManager<AppUser>>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(option =>
-            {
-                option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Key"])),
-                    ValidIssuer = configuration["Token:Issuer"]
-                };
-            });
-            services.AddAuthentication();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+             .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, option =>
+             {
+                 option.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Token:Key"])),
+                     ValidIssuer = configuration["Token:Issuer"],
+                     ValidateAudience = false,
+                     ValidateIssuer = true
+
+                 };
+             });
+            services.AddAuthorization();
+         
 
             return services;
         }
