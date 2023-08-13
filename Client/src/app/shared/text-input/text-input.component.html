@@ -1,0 +1,21 @@
+<div class="form-floating mb-3">
+  <input [formControl]="control" id="floatInput"
+  [type]="type" class="form-control"
+   [placeholder]="label"
+   [ngClass]="{
+    'is-invalid': control.touched && control.invalid,
+    'is-valid':control.touched && control.valid
+
+   }">
+  <label for="floatInput">{{label}}</label>
+
+  <div *ngIf="control.status == 'PENDING'">
+    <div   class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+  <div class="invalid-feedback" *ngIf="this.control.touched &&  this.control.errors?.['required']"> The {{label}} is Required</div>
+  <div class="invalid-feedback" *ngIf="this.control.touched &&  this.control.errors?.['email']"> Invlaid format form Email</div>
+  <div class="invalid-feedback" *ngIf="this.control.touched &&  this.control.errors?.['emailExists']"> The Email is Exist</div>
+
+</div>

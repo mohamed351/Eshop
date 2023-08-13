@@ -1,1 +1,22 @@
-<p>register works!</p>
+<div class="mt-5 d-flex justify-content-center">
+  <div class="col-md-3">
+    <ul class="text-danger list-unstyled text-center">
+      <li *ngFor="let item of errors">{{item}} </li>
+  </ul>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <h4 class="text-center">Sign Up</h4>
+      <!-- <div class="form-floating mb-3">
+        <input formControlName="email" type="email" class="form-control" id="email" placeholder="name@example.com">
+        <label for="email">Email address</label>
+      </div> -->
+      <app-text-input [formControl]="$any(registerForm.controls['displayName']) " [label]="'Display Name'"></app-text-input>
+      <app-text-input [formControl]="$any(registerForm.controls['email']) " [label]="'Email'"></app-text-input>
+
+      <app-text-input [formControl]="$any(registerForm.controls['password']) "  [type]="'password'" [label]="'Password'" ></app-text-input>
+
+      <div class="mt-2">
+       <button class="btn btn-primary w-100" [disabled]="!registerForm.valid" type="submit">Sign Up</button>
+    </div>
+    </form>
+  </div>
+</div>

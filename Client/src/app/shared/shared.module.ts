@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { PagingHeaderComponent } from './paging-header/paging-header.component';
 import { PagerComponent } from './pager/pager.component';
-import {FormsModule} from "@angular/forms";
-import { OrderTotalsComponent } from './order-totals/order-totals.component'
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { OrderTotalsComponent } from './order-totals/order-totals.component';
+import { TextInputComponent } from './text-input/text-input.component'
 
 
 
@@ -12,16 +13,18 @@ import { OrderTotalsComponent } from './order-totals/order-totals.component'
   declarations: [
     PagingHeaderComponent,
     PagerComponent,
-    OrderTotalsComponent
+    OrderTotalsComponent,
+    TextInputComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    PaginationModule.forRoot()
+    PaginationModule.forRoot(),
+    ReactiveFormsModule
 
 
   ],
-  exports:[PaginationModule, PagingHeaderComponent, OrderTotalsComponent]
+  exports:[PaginationModule, PagingHeaderComponent, OrderTotalsComponent, TextInputComponent]
 
 })
 export class SharedModule { }

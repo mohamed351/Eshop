@@ -33,6 +33,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         if(error.status === 404){
           this.router.navigateByUrl("/errors/not-found");
         }
+        if(error.status == 401){
+          this.toaster.error("401","UnAuthorized");
+        }
         else if (error.status == 500){
           const navigationExtra:NavigationExtras = {state : {error: error.error}}
           this.router.navigateByUrl("/errors/server-error",navigationExtra);

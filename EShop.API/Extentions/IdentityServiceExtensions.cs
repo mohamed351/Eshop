@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
@@ -24,7 +25,13 @@ namespace EShop.API.Extentions
 
             services.AddIdentityCore<AppUser>(c =>
             {
-               
+
+                c.SignIn.RequireConfirmedEmail = false;
+                c.SignIn.RequireConfirmedAccount = false;
+                c.SignIn.RequireConfirmedPhoneNumber = false;
+                c.Lockout.AllowedForNewUsers = true;
+                c.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                c.Lockout.MaxFailedAccessAttempts = 3;
             })
             .AddEntityFrameworkStores<AppIdentityDbContext>()
             .AddSignInManager<SignInManager<AppUser>>();

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/account/account.service';
 import { BasketService } from 'src/app/basket/services/basket.service';
 
 @Component({
@@ -8,9 +9,12 @@ import { BasketService } from 'src/app/basket/services/basket.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(public basketService:BasketService) { }
+  constructor(public basketService:BasketService , public accountService:AccountService) { }
 
   ngOnInit(): void {
+  }
+  logout(){
+    this.accountService.logout();
   }
 
 }

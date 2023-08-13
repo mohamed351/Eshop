@@ -9,6 +9,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import {BreadcrumbModule} from "xng-breadcrumb";
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 const routes:Routes =[
   {path:"", component:TestingErrorComponent},
     {path:"not-found", component:NotFoundComponent},
@@ -26,7 +27,8 @@ const routes:Routes =[
       preventDuplicates:true,
     }),
     BreadcrumbModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BsDropdownModule
 
 
   ],

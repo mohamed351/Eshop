@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -36,6 +38,7 @@ namespace EShop.API.Controllers
                 return Unauthorized(new APIResponse(401,"UnAuthorized"));
             }
             var result = await signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
+            var twoFactor = result.Succeeded;
             if (!result.Succeeded)
             {
                 return Unauthorized(new APIResponse(401, "UnAuthorized"));
@@ -62,11 +65,13 @@ namespace EShop.API.Controllers
             };
         }
         [HttpGet("emailexists")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<bool>> CheckEmailExist([FromQuery] string email)
         {
-            return await userManager.FindByEmailAsync(email) != null;
+            var result = await IsEmailExist(email);
+            return result;
         }
+
+    
         [HttpGet("address")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public async Task<ActionResult<AddressDTO>> GetAddressAsync()
@@ -78,22 +83,32 @@ namespace EShop.API.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<UserDTO>> Register(RegisterDTO registerDTO)
         {
+          
+            if ( await IsEmailExist(registerDTO.Email))
+            {
+                return BadRequest(new APIValidationErrorResponse() { Errors = new[] { "Email is in use"} ,Message ="Validation Error" , StatusCode = 400 });
+            }
             var register = new AppUser()
             {
                 DisplayName = registerDTO.DisplayName,
                 Email = registerDTO.Email,
                 UserName = registerDTO.Email
             };
-            var result = await userManager.CreateAsync(register);
+            var result = await userManager.CreateAsync(register, registerDTO.Password);
             if (!result.Succeeded) return BadRequest(new APIResponse(400));
 
             return new UserDTO()
             {
-                DisplayName = register.UserName,
+                DisplayName = register.DisplayName,
                 Email = register.Email,
                 Token = this.tokenService.CreateToken(register)
             };
         }
+        private async Task<bool> IsEmailExist(string email)
+        {
+            return(await userManager.Users.FirstOrDefaultAsync(a=> a.Email == email)) != null;
+        }
+
     }
-    
+
 }

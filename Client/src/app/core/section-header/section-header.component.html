@@ -8,7 +8,7 @@
           <div class="col-md-4">
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb">
-                <li class="breadcrumb-item" *ngFor="let item of breadcrumb"><a class="text-decoration-none " [routerLink]="[item.routeLink]">{{item.label}}</a></li>
+                <li class="breadcrumb-item" *ngFor="let item of breadcrumb"><a class="text-decoration-none " [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="'active'" [routerLink]="[item.routeLink]">{{item.label}}</a></li>
 
               </ol>
             </nav>

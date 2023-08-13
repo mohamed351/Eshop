@@ -21,12 +21,7 @@
       <ul class="navbar-nav d-flex align-items-center">
 
 
-        <li class="nav-item mx-2">
-          <a routerLink="/account/login" class="btn btn-outline-primary">Login</a>
-        </li>
-        <li class="nav-item mx-2">
-          <a routerLink="/account/register" class="btn btn-outline-primary">Register</a>
-        </li>
+
         <li class="mx-3">
 
           <a type="button" routerLink="/basket"  class="cart-item position-relative">
@@ -34,13 +29,44 @@
 
             <span style="font-size: 12px;width: 25px; height: 25px;text-align: center;vertical-align: middle;padding: 2px;" *ngIf="(basketService.basketService$ |async) as basket " class="text-white position-absolute top-0 start-100 translate-middle  bg-primary border border-light rounded-circle">
               {{  basket.items.length}}
-              <span class="visually-hidden">10</span>
+              <span class="visually-hidden">  {{  basket.items.length}}</span>
             </span>
           </a>
 
 
 
         </li>
+        <ng-container *ngIf="(accountService.currentUser$ |async) ===  null">
+        <li class="nav-item mx-2">
+          <a routerLink="/account/login" class="btn btn-outline-primary">Login</a>
+        </li>
+        <li class="nav-item mx-2">
+          <a routerLink="/account/register" class="btn btn-outline-primary">Register</a>
+        </li>
+      </ng-container>
+
+      <ng-container *ngIf="(accountService.currentUser$ |async) as user">
+        <li class="nav-item mx-2">
+
+          <div class="btn-group" dropdown>
+            <span id="button-basic" dropdownToggle type="button" class=" dropdown-toggle"
+                    aria-controls="dropdown-basic">
+          <strong>   Welcome {{user.displayName}} <span class="caret"></span></strong>
+            </span>
+            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                role="menu" aria-labelledby="button-basic">
+              <li role="menuitem"><a class="dropdown-item" routerLink="/basket" >View Basket</a></li>
+              <li role="menuitem"><a class="dropdown-item" routerLink="/Orders">View Orders</a></li>
+
+              <li class="divider dropdown-divider"></li>
+              <li role="menuitem"><a class="dropdown-item" (click)="logout()">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+      </ng-container>
 
       </ul>
 
