@@ -1,4 +1,5 @@
 ﻿using EShop.Core.Entities;
+using EShop.Core.Entities.Orders;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -32,6 +33,13 @@ namespace EShop.Infrastructure.Data
                 var products = JsonSerializer.Deserialize<List<Product>>(productJson);
                 context.Products.AddRange(products);
             }
+            if (!context.DeliveryMethods.Any())
+            {
+                var deliveryMethodJson = File.ReadAllText("../EShop.Infrastructure/Data/SeedingData/delivery.json");
+                var deliveryMethods = JsonSerializer.Deserialize<List<DeliveryMethod>>(deliveryMethodJson);
+                context.DeliveryMethods.AddRange(deliveryMethods);
+            }
+
             if (context.ChangeTracker.HasChanges())
             {
                await context.SaveChangesAsync();
