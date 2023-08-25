@@ -11,19 +11,19 @@ namespace EShop.Infrastructure.Services
 {
     public class OrderService : IOrderService
     {
-        private readonly IGenericRepository<DeliveryMethod> deliveryMethods;
-        private readonly IGenericRepository<Order> orders;
-        private readonly IGenericRepository<Product> productRepository;
+        //private readonly IGenericRepository<DeliveryMethod> deliveryMethods;
+        //private readonly IGenericRepository<Order> orders;
+        //private readonly IGenericRepository<Product> productRepository;
         private readonly IBasketRepository basketRepository;
+        private readonly IUnitOfWork work;
 
-        public OrderService(IGenericRepository<DeliveryMethod> deliveryMethods ,
-            IGenericRepository<Order> orders,
-            IGenericRepository<Product> productRepository , IBasketRepository basketRepository)
+        public OrderService( IBasketRepository basketRepository, IUnitOfWork work)
         {
-            this.deliveryMethods = deliveryMethods;
-            this.orders = orders;
-            this.productRepository = productRepository;
+            //this.deliveryMethods = deliveryMethods;
+            //this.orders = orders;
+            //this.productRepository = productRepository;
             this.basketRepository = basketRepository;
+            this.work = work;
         }
         public async Task<Order> CreateOrderAsync(string buyerEmail, int DeliveryMethodId, string basketId, Address shippingAddress)
         {
@@ -32,7 +32,7 @@ namespace EShop.Infrastructure.Services
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
-                var productItem = await productRepository.GetByIDAsync(item.Id);
+                var productItem = await work.Repository<Product>().GetByIDAsync(item.Id);
                 var itemOrdered = new ProductItemOrdered(productItem.ID, productItem.Name, productItem.PictureUrl);
 
                 var OrderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
@@ -41,13 +41,17 @@ namespace EShop.Infrastructure.Services
               
                    
             }
-            var delivery = await deliveryMethods.GetByIDAsync(DeliveryMethodId);
+            var delivery = await work.Repository<DeliveryMethod>().GetByIDAsync(DeliveryMethodId);
 
             var subTotal = items.Sum(a => a.Price * a.Quantity);
 
             var order = new Order(buyerEmail, shippingAddress, delivery, items, subTotal);
 
-            return order;
+            this.work.Repository<Order>().Add(order);
+            var result = await this.work.Complete();
+
+
+            return result <= 0 ? null: order;
             
         }
 

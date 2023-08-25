@@ -42,7 +42,7 @@ namespace EShop.API
             // app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCors("CorsPolicy");
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

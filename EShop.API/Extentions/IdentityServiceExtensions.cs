@@ -49,8 +49,8 @@ namespace EShop.API.Extentions
 
                  };
              });
-            services.AddAuthorization();
-         
+            //services.AddAuthorization();
+
 
             return services;
         }

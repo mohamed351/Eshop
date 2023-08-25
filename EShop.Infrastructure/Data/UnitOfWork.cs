@@ -17,9 +17,27 @@ namespace EShop.Infrastructure.Data
         {
             this.context = context;
         }
-        public Task<int> Complete()
+        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
         {
-            throw new NotImplementedException();
+            if(_repositories == null)
+            {
+                _repositories = new Hashtable();
+               
+            }
+
+            var type = typeof(TEntity).Name;
+            if (!_repositories.ContainsKey(type))
+            {
+                var repositoryType = typeof(GenericRepository<>);
+                var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(TEntity)),this.context);
+                _repositories.Add(type,repositoryInstance);
+
+            }
+            return (IGenericRepository<TEntity>)_repositories[type];
+        }
+        public async Task<int> Complete()
+        {
+            return await context.SaveChangesAsync();
         }
 
         public void Dispose()
@@ -27,9 +45,6 @@ namespace EShop.Infrastructure.Data
             context.Dispose();
         }
 
-        public IGenericRepository<TEntity> Repository<TEntity>() where TEntity : BaseEntity
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

@@ -20,6 +20,8 @@ namespace EShop.API.Mappings
                  .ForMember(a => a.Street, o => o.MapFrom(c => c.Street))
                  .ForMember(a => a.ZipCode, o => o.MapFrom(c => c.ZipCode));
 
+            CreateMap<AddressDTO , Core.Entities.Orders.Address> ();
+
         }
     }
 }

@@ -14,14 +14,14 @@ namespace EShop.Core.Entities.Orders
         {
             
         }
-        public Address(string street, string city, string zipCode, string appUserID, AppUser appUser)
+        public Address(string street, string city, string zipCode)
         {
     
             Street = street;
             City = city;
             ZipCode = zipCode;
-            AppUserID = appUserID;
-            AppUser = appUser;
+         
+           
         }
 
    
@@ -32,9 +32,8 @@ namespace EShop.Core.Entities.Orders
         public string City { get; set; }
 
         public string ZipCode { get; set; }
-        [Required]
-        public string AppUserID { get; set; }
+        
 
-        public AppUser AppUser { get; set; }
+     
     }
 }
