@@ -29,6 +29,7 @@ namespace EShop.API.Extentions
                 var option = ConfigurationOptions.Parse(configuration.GetConnectionString("RedisConnection"));
                 return ConnectionMultiplexer.Connect(option);
             });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IBasketRepository, BasketRepository>();

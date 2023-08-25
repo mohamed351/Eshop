@@ -17,10 +17,10 @@ namespace EShop.API.Controllers
         {
             this.orderService = orderService;
         }
-        //[HttpPost]
-        //public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
-        //{
-
-        //}
+        [HttpPost]
+        public async Task<ActionResult<Order>> CreateOrder(OrderDTO orderDTO)
+        {
+            return Ok();
+        }
     }
 }

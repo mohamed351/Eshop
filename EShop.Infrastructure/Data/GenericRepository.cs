@@ -47,5 +47,21 @@ namespace EShop.Infrastructure.Data
         {
             return SpecificationEvaluator<T>.GetQuery(this.context.Set<T>().AsQueryable(), specification);
         }
+
+        public void Add(T Entity)
+        {
+             this.context.Set<T>().Add(Entity);
+        }
+
+        public void Update(T Entity)
+        {
+            this.context.Set<T>().Attach(Entity);
+            context.Entry(Entity).State = EntityState.Modified;
+        }
+
+        public void Delete(T Entity)
+        {
+            context.Set<T>().Remove(Entity);
+        }
     }
 }
