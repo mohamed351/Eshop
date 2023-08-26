@@ -1,6 +1,7 @@
 ﻿using EShop.Core.Entities;
 using EShop.Core.Entities.Orders;
 using EShop.Core.Interfaces;
+using EShop.Core.Specifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,19 +56,21 @@ namespace EShop.Infrastructure.Services
             
         }
 
-        public Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
+        public async Task<IReadOnlyList<DeliveryMethod>> GetDeliveryMethodsAsync()
         {
-            throw new NotImplementedException();
+            return await work.Repository<DeliveryMethod>().ListAllAsync();  
         }
 
-        public Task<Order> GetOrderByID(int ID, string buyerEmail)
+        public async Task<Order> GetOrderByID(int ID, string buyerEmail)
         {
-            throw new NotImplementedException();
+            var specification = new OrderWithItemAndOrderingSpecification(ID, buyerEmail);
+            return await work.Repository<Order>().GetEntityWithSpec(specification);
         }
 
-        public Task<IReadOnlyList<Order>> GetOrderFromUserAsync(string buyerEmail)
+        public async Task<IReadOnlyList<Order>> GetOrderFromUserAsync(string buyerEmail)
         {
-            throw new NotImplementedException();
+            var specification = new OrderWithItemAndOrderingSpecification(buyerEmail);
+            return await work.Repository<Order>().ListAllAsync(specification);
         }
     }
 }
